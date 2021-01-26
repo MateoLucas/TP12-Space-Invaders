@@ -52,8 +52,8 @@ bool collide(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int 
 
 // --- display ---
 
-#define BUFFER_W 320
-#define BUFFER_H 200
+#define BUFFER_W 280
+#define BUFFER_H 220
 
 #define DISP_SCALE 3
 #define DISP_W (BUFFER_W * DISP_SCALE)
@@ -629,45 +629,73 @@ typedef struct ALIEN
 } ALIEN;
 
 #define ALIENS_N 55
-#define ALIEN_SPACE_BUFFER 10
+#define ALIEN_SPACE_BUFFER 15
 ALIEN aliens[ALIENS_N];
-#define REFERENCE 10
+#define REFERENCE_X (BUFFER_W/4)-(((ALIEN_BUG_W*5)+ALIEN_SPACE_BUFFER)/2)//5 por la cantidad de columnas
+#define REFERENCE_Y (BUFFER_H/10)
 //aliens[i].used = false;
 
 void aliens_init()
 {
 
     int t;
-    for(t=0; t < 55; t++)
+    int columnas = 0;
+    for(t=0; t < ALIENS_N; t++)
     {
-        int s = t/10;
+        int s = t/11;
+        columnas++;
         aliens[t].used = true;
         aliens[t].type = ALIEN_TYPE_BUG;
         aliens[t].shot_timer = between(1, 99);
         aliens[t].blink = 0;
         aliens[t].life = 4;
-       
-        aliens[t].x = t*REFERENCE+ALIEN_SPACE_BUFFER;
-        aliens[t].y = s*REFERENCE + ALIEN_SPACE_BUFFER;
+        if(columnas >= 11)
+        {
+            columnas=0;
+        }
+        aliens[t].x = REFERENCE_X + columnas*ALIEN_SPACE_BUFFER;
+        aliens[t].y = REFERENCE_Y+ s* ALIEN_SPACE_BUFFER;
     }
 }
 
 void aliens_update()
-{
+{   
+    int j;
+    bool detect_border=false;
+    bool direction = true;//true = derecha, flase = izquierda
+    for(j=0;j<ALIENS_N;j++)//while
+    {
+        if(((aliens[j].x >= BUFFER_W)||aliens[j].x<= 0))
+        {
+            detect_border=true;
+        }
+    }
     int i;
+    
     for(i=0;i<ALIENS_N;i++)
     {
         
-        if(i<= 5)
+        if(detect_border)
         {
-            aliens[i].x +=0;
-            //aliens[i].y +=10;
+            if(direction)
+            {
+                direction = false;
+            }else
+            {
+                direction = true;
+            }
+            aliens[i].y += ALIEN_BUG_H/2;
+            
+            
         }
-        if(aliens[i].y >= BUFFER_H)
+        if(direction)
         {
-            aliens[i].used = false;
-            continue;
+            aliens[i].x++;
+        }else
+        {
+            aliens[i].x--;
         }
+        
 
         if(aliens[i].blink)
             aliens[i].blink--;
@@ -728,6 +756,7 @@ void aliens_update()
             }
         }
     }
+    detect_border= false;
 }
 
 void aliens_draw()
