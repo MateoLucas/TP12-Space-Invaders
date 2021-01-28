@@ -277,7 +277,7 @@ typedef struct FX
     bool used;
 } FX;
 
-#define FX_N 128
+#define FX_N 55 //ALIEN_N
 FX fx[FX_N];
 
 void fx_init()
@@ -696,10 +696,10 @@ void aliens_update()
         
         if(direction)
         {
-            aliens[i].x += speed;
+            aliens[i].x += 1;
         }else
         {
-            aliens[i].x -= speed;
+            aliens[i].x -= 1;
         }
         
 
