@@ -629,6 +629,7 @@ typedef struct ALIEN
 } ALIEN;
 
 #define ALIENS_N 55
+
 #define ALIEN_SPACE_BUFFER 15
 ALIEN aliens[ALIENS_N];
 #define REFERENCE_X (BUFFER_W/4)-(((ALIEN_BUG_W*5)+ALIEN_SPACE_BUFFER)/2)//5 por la cantidad de columnas
@@ -662,7 +663,9 @@ void aliens_update()
 {   
     int j;
     bool detect_border=false;
-    bool direction = true;//true = derecha, flase = izquierda
+    bool static direction = false;//true = derecha, flase = izquierda
+    //int static alien_speed_factor = 2*frames/1000;
+    
     for(j=0;j<ALIENS_N;j++)//while
     {
         if(((aliens[j].x >= BUFFER_W)||aliens[j].x<= 0))
@@ -671,29 +674,32 @@ void aliens_update()
         }
     }
     int i;
+    if(detect_border)
+    {
+        if(direction)
+        {
+            direction = false;
+            
+        }else
+        {
+            direction = true;   
+        }
+    }
     
     for(i=0;i<ALIENS_N;i++)
     {
         
         if(detect_border)
         {
-            if(direction)
-            {
-                direction = false;
-            }else
-            {
-                direction = true;
-            }
-            aliens[i].y += ALIEN_BUG_H/2;
-            
-            
+           aliens[i].y += ALIEN_BUG_H/2;        
         }
+        
         if(direction)
         {
-            aliens[i].x++;
+            aliens[i].x += speed;
         }else
         {
-            aliens[i].x--;
+            aliens[i].x -= speed;
         }
         
 
@@ -705,6 +711,7 @@ void aliens_update()
             aliens[i].life--;
             aliens[i].blink = 4;
         }
+        
         int cx = aliens[i].x + (ALIEN_W[aliens[i].type] / 2);
         int cy = aliens[i].y + (ALIEN_H[aliens[i].type] / 2);
         if(aliens[i].life <= 0)
@@ -756,7 +763,6 @@ void aliens_update()
             }
         }
     }
-    detect_border= false;
 }
 
 void aliens_draw()
