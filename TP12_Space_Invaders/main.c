@@ -394,12 +394,12 @@ bool shots_add(bool ship, bool straight, int x, int y)
                 shots[i].dx = 0;
                 shots[i].dy = 2;
             }
-            else
+            /*else
             {
 
                 shots[i].dx = between(-2, 2);
                 shots[i].dy = between(-2, 2);
-            }
+            }*/
 
             // if the shot has no speed, don't bother
             if(!shots[i].dx && !shots[i].dy)
@@ -747,7 +747,7 @@ void aliens_update()
                 switch(aliens[i].type)
                 {
                 case ALIEN_TYPE_BUG:
-                    shots_add(false, false, cx, cy);
+                    shots_add(false, true, cx, cy);
                     aliens[i].shot_timer = 150;
                     break;
                 case ALIEN_TYPE_ARROW:
