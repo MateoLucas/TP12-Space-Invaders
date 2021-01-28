@@ -386,20 +386,13 @@ bool shots_add(bool ship, bool straight, int x, int y)
         }
         else // alien
         {
+            int j;
+           
             shots[i].x = x - (ALIEN_SHOT_W / 2);
             shots[i].y = y - (ALIEN_SHOT_H / 2);
+            shots[i].dx = 0;
+            shots[i].dy = 2;
 
-            if(straight)
-            {
-                shots[i].dx = 0;
-                shots[i].dy = 2;
-            }
-            /*else
-            {
-
-                shots[i].dx = between(-2, 2);
-                shots[i].dy = between(-2, 2);
-            }*/
 
             // if the shot has no speed, don't bother
             if(!shots[i].dx && !shots[i].dy)
@@ -635,7 +628,7 @@ ALIEN aliens[ALIENS_N];
 #define REFERENCE_X (BUFFER_W/4)-(((ALIEN_BUG_W*5)+ALIEN_SPACE_BUFFER)/2)//5 por la cantidad de columnas
 #define REFERENCE_Y (BUFFER_H/10)
 //aliens[i].used = false;
-
+#define N_COLS 11
 void aliens_init()
 {
 
@@ -650,7 +643,7 @@ void aliens_init()
         aliens[t].shot_timer = between(1, 99);
         aliens[t].blink = 0;
         aliens[t].life = 4;
-        if(columnas >= 11)
+        if(columnas >= N_COLS)
         {
             columnas=0;
         }
@@ -658,7 +651,22 @@ void aliens_init()
         aliens[t].y = REFERENCE_Y+ s* ALIEN_SPACE_BUFFER;
     }
 }
-
+bool aliens_last(int alien_n)
+{
+    int i;
+    bool answer=true;
+    int dead=0;
+    int count=0;
+    for(i=alien_n ; i<=ALIENS_N ; i+=N_COLS)
+    {
+        count++;
+        if(aliens[i+N_COLS].used)
+            dead++;
+    }
+    if(dead == count)
+        answer = false;
+    return answer;
+}
 void aliens_update()
 {   
     int j;
@@ -717,10 +725,11 @@ void aliens_update()
             int cy = aliens[i].y + (ALIEN_H[aliens[i].type] / 2);
             if(aliens[i].life <= 0)
             {
-            fx_add(false, cx, cy);
+                
+                fx_add(false, cx, cy);
 
-            switch(aliens[i].type)
-            {
+                switch(aliens[i].type)
+                {
                 case ALIEN_TYPE_BUG:
                     score += 200;
                     break;
@@ -735,11 +744,11 @@ void aliens_update()
                     fx_add(false, cx+4, cy+10);
                     fx_add(false, cx+8, cy+8);
                     break;
-            }
+                }
 
-            aliens[i].used = false;
-            continue;
-        }
+                aliens[i].used = false;
+                continue;
+            }   
 
             aliens[i].shot_timer--;
             if(aliens[i].shot_timer == 0)
@@ -747,8 +756,11 @@ void aliens_update()
                 switch(aliens[i].type)
                 {
                 case ALIEN_TYPE_BUG:
-                    shots_add(false, true, cx, cy);
-                    aliens[i].shot_timer = 150;
+                    if(aliens_last(i))
+                    {
+                        shots_add(false, true, cx, cy);
+                        aliens[i].shot_timer = 150;
+                    }
                     break;
                 case ALIEN_TYPE_ARROW:
                     shots_add(false, true, cx, aliens[i].y);
