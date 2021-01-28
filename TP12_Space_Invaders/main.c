@@ -668,7 +668,7 @@ void aliens_update()
     
     for(j=0;j<ALIENS_N;j++)//while
     {
-        if(((aliens[j].x >= BUFFER_W)||aliens[j].x<= 0))
+        if((aliens[j].used)&&((aliens[j].x >= BUFFER_W)||aliens[j].x<= 0))
         {
             detect_border=true;
         }
@@ -688,34 +688,35 @@ void aliens_update()
     
     for(i=0;i<ALIENS_N;i++)
     {
+        if(aliens[i].used)
+        {
+            if(detect_border)
+            {
+                aliens[i].y += ALIEN_BUG_H/2;        
+            }
         
-        if(detect_border)
-        {
-           aliens[i].y += ALIEN_BUG_H/2;        
-        }
-        
-        if(direction)
-        {
-            aliens[i].x += 1;
-        }else
-        {
-            aliens[i].x -= 1;
-        }
+            if(direction)
+            {
+                aliens[i].x += 1;
+            }else
+            {
+                aliens[i].x -= 1;
+            }
         
 
-        if(aliens[i].blink)
-            aliens[i].blink--;
+            if(aliens[i].blink)
+                aliens[i].blink--;
 
-        if(shots_collide(false, aliens[i].x, aliens[i].y, ALIEN_W[aliens[i].type], ALIEN_H[aliens[i].type]))
-        {
+            if(shots_collide(false, aliens[i].x, aliens[i].y, ALIEN_W[aliens[i].type], ALIEN_H[aliens[i].type]))
+            {
             aliens[i].life--;
             aliens[i].blink = 4;
         }
         
-        int cx = aliens[i].x + (ALIEN_W[aliens[i].type] / 2);
-        int cy = aliens[i].y + (ALIEN_H[aliens[i].type] / 2);
-        if(aliens[i].life <= 0)
-        {
+            int cx = aliens[i].x + (ALIEN_W[aliens[i].type] / 2);
+            int cy = aliens[i].y + (ALIEN_H[aliens[i].type] / 2);
+            if(aliens[i].life <= 0)
+            {
             fx_add(false, cx, cy);
 
             switch(aliens[i].type)
@@ -740,11 +741,11 @@ void aliens_update()
             continue;
         }
 
-        aliens[i].shot_timer--;
-        if(aliens[i].shot_timer == 0)
-        {
-            switch(aliens[i].type)
+            aliens[i].shot_timer--;
+            if(aliens[i].shot_timer == 0)
             {
+                switch(aliens[i].type)
+                {
                 case ALIEN_TYPE_BUG:
                     shots_add(false, false, cx, cy);
                     aliens[i].shot_timer = 150;
@@ -760,6 +761,7 @@ void aliens_update()
                     shots_add(false, true, cx+5, cy + 8);
                     aliens[i].shot_timer = 200;
                     break;
+                }
             }
         }
     }
