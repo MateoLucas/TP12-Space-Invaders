@@ -664,7 +664,7 @@ bool aliens_last(int alien_n)
 
     else if (!aliens[alien_n+N_COLS].used)
     {
-         answer=true;
+        answer=true;
         //for(i=alien_n+N_COLS ; i<=ALIENS_N ; i+=N_COLS)
         //{
           //  count++;
