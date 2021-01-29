@@ -654,18 +654,26 @@ void aliens_init()
 bool aliens_last(int alien_n)
 {
     int i;
-    bool answer=true;
+    bool answer=false;
     int dead=0;
     int count=0;
-    for(i=alien_n ; i<=ALIENS_N ; i+=N_COLS)
+    if (alien_n>(ALIENS_N-N_COLS))
     {
-        count++;
-        if(aliens[i+N_COLS].used)
-            dead++;
+        answer=true;
     }
-    if(dead == count)
-        answer = false;
-    return answer;
+
+    else if (!aliens[alien_n+N_COLS].used)
+    {
+         answer=true;
+        //for(i=alien_n+N_COLS ; i<=ALIENS_N ; i+=N_COLS)
+        //{
+          //  count++;
+            //if(!aliens[i].used)
+              //  dead++;
+        //}
+        //if(dead == count)
+          //  answer = true;
+   }
 }
 void aliens_update()
 {   
