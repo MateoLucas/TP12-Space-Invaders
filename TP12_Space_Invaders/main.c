@@ -901,6 +901,65 @@ void hud_draw()
             "G A M E  O V E R"
         );
 }
+#define ESTRUCTURA '#'
+#define INRA_ESTRUC '|'
+int save_game()
+{
+    FILE *pSave = fopen("saved_game.txt", "w");
+    
+    // divisor de elementos intra estructurales = |
+    //divisor de estructuras = #
+    
+    //alien save
+    fputc(ESTRUCTURA);
+    int i;
+    int bug_type;
+    for(i=0; i <= ALIENS_N ;i++)
+    {
+        fprintf("%d",aliens[i].x);
+        fputc(INTRA_ESTRUC);
+        fprintf("%d",aliens[i].y);
+        fputc(INTRA_ESTRUC);
+        switch (aliens[i].type)
+        {
+            case ALIEN_TYPE_BUG:
+                fprintf('b');
+                break;
+               
+            case ALIEN_TYPE_THICCBOI:
+                fprintf('t');
+                break;
+        }
+        
+        fputc(INTRA_ESTRUC);
+        fprintf("%d",aliens[i].shot_timer);
+        fputc(INTRA_ESTRUC);
+        fprintf("%d",aliens[i].blink);
+        fputc(INTRA_ESTRUC);
+        fprintf("%d",aliens[i].life);
+        fputc(INTRA_ESTRUC);
+        fprintf("%c", aliens[i].used ? 't' : 'f');
+        fputc(INTRA_ESTRUC);
+        fputc(ESTRUCTURA);
+    }
+    
+    
+    fflush(pSave);
+    int check= fclose(pSave);
+    return check;
+}
+
+int load_game()
+{
+    FILE *pLoad = fopen("saved_game.txt","r");
+    int i;
+    for(i = 0 ;i<=3;i++ )
+    {
+        printf("%c",fgetc(pLoad));
+    }
+    int check = fclose(pLoad);
+    return check;
+}
 
 
 // --- main ---
@@ -950,7 +1009,17 @@ int main()
     ALLEGRO_EVENT event;
 
     al_start_timer(timer);
-
+    
+    int save;
+    save = save_game();
+    if(save==NULL)
+        printf("save error!");
+    
+    int load;
+    load = load_game();
+    if(load == NULL)
+        printf("load error!");
+    
     while(1)
     {
         al_wait_for_event(queue, &event);
