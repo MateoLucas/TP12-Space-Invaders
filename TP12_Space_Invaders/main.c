@@ -902,46 +902,64 @@ void hud_draw()
         );
 }
 #define ESTRUCTURA '#'
-#define INRA_ESTRUC '|'
+#define INTRA_ESTRUC '|'
+/*SAVE GAME 
+ * 
+ * 
+ * guarda en el siguiente orden: Score ; 55 aliens(x,y,tipo,,shot timer, blink, life, used )*/
 int save_game()
 {
     FILE *pSave = fopen("saved_game.txt", "w");
     
-    // divisor de elementos intra estructurales = |
-    //divisor de estructuras = #
+    //score  save
+    fprintf(pSave,"ld%",score);
     
     //alien save
-    fputc(ESTRUCTURA);
+    fputc(ESTRUCTURA, pSave);
     int i;
     int bug_type;
-    for(i=0; i <= ALIENS_N ;i++)
+    for(i=0; i <= ALIENS_N-1 ;i++)
     {
-        fprintf("%d",aliens[i].x);
-        fputc(INTRA_ESTRUC);
-        fprintf("%d",aliens[i].y);
-        fputc(INTRA_ESTRUC);
+        fprintf(pSave,"%d",aliens[i].x);
+        fputc(INTRA_ESTRUC,pSave);
+        fprintf(pSave,"%d",aliens[i].y);
+        fputc(INTRA_ESTRUC,pSave);
         switch (aliens[i].type)
         {
             case ALIEN_TYPE_BUG:
-                fprintf('b');
+                fprintf(pSave,"%c",'b');
                 break;
                
             case ALIEN_TYPE_THICCBOI:
-                fprintf('t');
+               fprintf(pSave,"%c",'t');
                 break;
         }
         
-        fputc(INTRA_ESTRUC);
-        fprintf("%d",aliens[i].shot_timer);
-        fputc(INTRA_ESTRUC);
-        fprintf("%d",aliens[i].blink);
-        fputc(INTRA_ESTRUC);
-        fprintf("%d",aliens[i].life);
-        fputc(INTRA_ESTRUC);
-        fprintf("%c", aliens[i].used ? 't' : 'f');
-        fputc(INTRA_ESTRUC);
-        fputc(ESTRUCTURA);
+        fputc(INTRA_ESTRUC,pSave);
+        fprintf(pSave,"%d",aliens[i].shot_timer);
+        fputc(INTRA_ESTRUC,pSave);
+        fprintf(pSave,"%d",aliens[i].blink);
+        fputc(INTRA_ESTRUC,pSave);
+        fprintf(pSave,"%d",aliens[i].life);
+        fputc(INTRA_ESTRUC,pSave);
+        fprintf(pSave,"%c", aliens[i].used ? 't' : 'f');
+        fputc(ESTRUCTURA,pSave);
     }
+    
+    //ship save
+    fputc(ESTRUCTURA,pSave);
+    fprintf(pSave,"%d",ship.x);
+    fputc(INTRA_ESTRUC,pSave);
+    fprintf(pSave,"%d",ship.y);
+    fputc(INTRA_ESTRUC,pSave); 
+    fprintf(pSave,"%d",ship.shot_timer);
+    fputc(INTRA_ESTRUC,pSave);
+    fprintf(pSave,"%d",ship.lives);
+    fputc(INTRA_ESTRUC,pSave);
+    fprintf(pSave,"%d",ship.respawn_timer);
+    fputc(INTRA_ESTRUC,pSave);
+    fprintf(pSave,"%d",ship.invincible_timer);
+    fputc(INTRA_ESTRUC,pSave);
     
     
     fflush(pSave);
