@@ -170,6 +170,9 @@ typedef struct SPRITES
 } SPRITES;
 SPRITES sprites;
 
+ALLEGRO_BITMAP* muro1;
+ALLEGRO_BITMAP* muro3;
+
 ALLEGRO_BITMAP* sprite_grab(int x, int y, int w, int h)
 {
     ALLEGRO_BITMAP* sprite = al_create_sub_bitmap(sprites._sheet, x, y, w, h);
@@ -182,6 +185,11 @@ void sprites_init()
     sprites._sheet = al_load_bitmap("spritesheet.png");
     must_init(sprites._sheet, "spritesheet");
 
+    muro1 = al_load_bitmap("Muro.png");
+    must_init(muro1, "Muro.png");
+    muro3 = al_load_bitmap("Muro_roto.png");
+    must_init(muro3, "Muro_roto.png");
+    
     sprites.ship = sprite_grab(0, 0, SHIP_W, SHIP_H);
 
     sprites.life = sprite_grab(0, 14, LIFE_W, LIFE_H);
@@ -236,6 +244,97 @@ void sprites_deinit()
     al_destroy_bitmap(sprites.powerup[3]);
 
     al_destroy_bitmap(sprites._sheet);
+    
+    al_destroy_bitmap(muro1);
+    al_destroy_bitmap(muro3);
+}
+
+#define MURO_S 8
+#define MURO_H 8
+#define MURO_N 48
+#define STRUCT_N 4
+#define M_POR_S 8
+
+typedef struct MURO
+{
+    int x, y;
+    int life;
+    int type;
+    bool used;
+} MURO;
+
+MURO muro_arr[MURO_N];
+
+void muro_init ()
+{
+    int i;
+    int j;
+            muro_arr[0].used = true;
+        muro_arr[0].life=2;
+        muro_arr[0].x=BUFFER_H;
+        muro_arr[0].y=BUFFER_W;
+    for (j=1;j<3;j++)
+    {   
+        muro_arr[j].used = true;
+        muro_arr[j].life=2;
+        muro_arr[j].x=BUFFER_H/9+j*MURO_S;
+        muro_arr[j].y=BUFFER_W;
+         
+    }
+    /*for(int j=M_POR_S;j<=32;j=j+M_POR_S)
+    {
+        for (i=j-MURO_N/4;i<j-MURO_N/8;i++)
+        {
+            muro_arr[i].used = true;
+            muro_arr[i].life=2;
+            if(i%8==0)
+            {
+                muro_arr[i].x=BUFFER_W/9+((j/4)-2)*BUFFER_W/9;
+                muro_arr[i].y=BUFFER_H-30;    
+            }
+            else
+            {
+                if ((i%2)==0)
+                {
+                    muro_arr[i].x=muro_arr[i-1].x+MURO_H;
+                    muro_arr[i].y=muro_arr[i-1].y;
+                }
+                else
+                {
+                    muro_arr[i].y=muro_arr[i-1].y-MURO_H;
+                    muro_arr[i].x=muro_arr[i-1].x;
+                }
+            }
+        }
+        for (i;i<j;i++)
+        {
+            muro_arr[i].used = true;
+            muro_arr[i].life=2;
+            if(i>=j-2&&i<j)
+            {    
+                muro_arr[i].y=muro_arr[i-MURO_N/8].y;
+                muro_arr[i].x=muro_arr[i-MURO_N/8].x+MURO_H;            
+            }
+            else
+            {
+                muro_arr[i].y=muro_arr[i-MURO_N/8].y;
+                muro_arr[i].x=muro_arr[i-MURO_N/8].x+3*MURO_H;
+            }
+        }    
+    }    
+    */
+    
+}
+
+void muro_draw ()
+{
+    //for (int i=0;i<MURO_N;i++)
+   // {
+        
+            al_draw_bitmap(muro1, muro_arr[0].x, muro_arr[0].y, 0);
+        //else
+            //al_draw_bitmap(muro3, muro_arr[i].x, muro_arr[i].y, 0);
+    //}
 }
 
 
@@ -903,16 +1002,19 @@ void hud_draw()
 }
 #define ESTRUCTURA '#'
 #define INTRA_ESTRUC '|'
+#define END_LOAD '$'
 /*SAVE GAME 
  * 
  * 
- * guarda en el siguiente orden: Score ; 55 aliens(x,y,tipo,,shot timer, blink, life, used )*/
+ * guarda en el siguiente orden: Score ; 55 aliens(x,y,tipo,,shot timer, blink, life, used ),ship(x,y,shot_timer,lives,respawn_timer,invincible_timer)*/
 int save_game()
 {
     FILE *pSave = fopen("saved_game.txt", "w");
     
     //score  save
-    fprintf(pSave,"ld%",score);
+    fputc(INTRA_ESTRUC,pSave);
+    fprintf(pSave,"%ld",score);
+    fputc(INTRA_ESTRUC,pSave);
     
     //alien save
     fputc(ESTRUCTURA, pSave);
@@ -961,7 +1063,7 @@ int save_game()
     fprintf(pSave,"%d",ship.invincible_timer);
     fputc(INTRA_ESTRUC,pSave);
     
-    
+    fputc(END_LOAD,pSave);
     fflush(pSave);
     int check= fclose(pSave);
     return check;
@@ -970,10 +1072,10 @@ int save_game()
 int load_game()
 {
     FILE *pLoad = fopen("saved_game.txt","r");
-    int i;
-    for(i = 0 ;i<=3;i++ )
+    int load = fscanf(pLoad,);
+    while((load != NULL)&&(load != END_LOAD)&&(load != EOF))
     {
-        printf("%c",fgetc(pLoad));
+        
     }
     int check = fclose(pLoad);
     return check;
