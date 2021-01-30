@@ -1012,9 +1012,9 @@ int save_game()
     FILE *pSave = fopen("saved_game.txt", "w");
     
     //score  save
-    fputc(INTRA_ESTRUC,pSave);
+    fputc(ESTRUCTURA,pSave);//importante que empiece con ESTRUCTURA
     fprintf(pSave,"%ld",score);
-    fputc(INTRA_ESTRUC,pSave);
+    fputc(ESTRUCTURA,pSave);
     
     //alien save
     fputc(ESTRUCTURA, pSave);
@@ -1040,7 +1040,9 @@ int save_game()
         fputc(INTRA_ESTRUC,pSave);
         fprintf(pSave,"%d",aliens[i].shot_timer);
         fputc(INTRA_ESTRUC,pSave);
-        fprintf(pSave,"%d",aliens[i].blink);
+        fprintf(pSave,"%d",aliens[i].blink);fscanf();
+            fscanf();
+            fgetc();
         fputc(INTRA_ESTRUC,pSave);
         fprintf(pSave,"%d",aliens[i].life);
         fputc(INTRA_ESTRUC,pSave);
@@ -1072,9 +1074,47 @@ int save_game()
 int load_game()
 {
     FILE *pLoad = fopen("saved_game.txt","r");
-    int load = fscanf(pLoad,);
-    while((load != NULL)&&(load != END_LOAD)&&(load != EOF))
+    char load = fgetc(pLoad);
+    if((load != NULL)&&(load == ESTRUCTURA))
     {
+        //score
+        fscanf(pLoad,"%ld",&score);
+        load = fgetc(pLoad);//ESTRUCTURA
+        //aliens
+        int i;
+        for(i=0;i<= ALIENS_N-1;i++)
+        {
+            fscanf(pLoad, "%ld",&aliens[i].x);//x
+            load = fgetc(pLoad);// INTRA_STRUCT
+            fscanf(pLoad, "%ld",&aliens[i].y);//y
+            load = fgetc(pLoad);// INTRA_STRUCT
+            //fgetc();//type
+            load = fgetc(pLoad);// INTRA_STRUCT
+            fscanf(pLoad, "%ld",&aliens[i].shot_timer);//shot_timer
+            load = fgetc(pLoad);// INTRA_STRUCT
+            fscanf(pLoad, "%ld",&aliens[i].blink);//blink
+            load = fgetc(pLoad);// INTRA_STRUCT
+            fscanf(pLoad, "%ld",&aliens[i].life);//lives
+            load = fgetc(pLoad);// INTRA_STRUCT
+            aliens[i].used = ((fgetc(pLoad)=='t') ? true : false);//used  
+            load = fgetc(pLoad);//ESTRUCTURA
+        }
+        //ship
+        load = fgetc(pLoad);//ESTRUCTURA
+        fscanf(pLoad, "%ld",&ship.x);//x
+        load = fgetc(pLoad);// INTRA_STRUCT
+        fscanf(pLoad, "%ld",&ship.y);//y
+        load = fgetc(pLoad);// INTRA_STRUCT
+        fscanf(pLoad, "%ld",&ship.shot_timer);//shot_timer
+        load = fgetc(pLoad);// INTRA_STRUCT
+        fscanf(pLoad, "%ld",&ship.lives);//lives
+        load = fgetc(pLoad);// INTRA_STRUCT
+        fscanf(pLoad, "%ld",&ship.respawn_timer);//respawn
+        load = fgetc(pLoad);// INTRA_STRUCT
+        fscanf(pLoad, "%ld",&ship.invincible_timer);//lives
+        load = fgetc(pLoad);// INTRA_STRUCT
+        
+        
         
     }
     int check = fclose(pLoad);
