@@ -1042,9 +1042,6 @@ int save_game()
         fprintf(pSave,"%d",aliens[i].shot_timer);
         fputc(INTRA_ESTRUC,pSave);
         fprintf(pSave,"%d",aliens[i].blink);
-        //fscanf();
-          //  fscanf();
-            //fgetc();
         fputc(INTRA_ESTRUC,pSave);
         fprintf(pSave,"%d",aliens[i].life);
         fputc(INTRA_ESTRUC,pSave);
@@ -1090,7 +1087,16 @@ int load_game()
             load = fgetc(pLoad);// INTRA_STRUCT
             fscanf(pLoad, "%ld",&aliens[i].y);//y
             load = fgetc(pLoad);// INTRA_STRUCT
-            //fgetc();//type
+            load = fgetc(pLoad);
+            switch (load)
+            {
+                    case 'b':
+                        aliens[i].type = ALIEN_TYPE_BUG;
+                        break;
+                    case 't':
+                        aliens[i].type = ALIEN_TYPE_THICCBOI;
+                        break;
+            }
             load = fgetc(pLoad);// INTRA_STRUCT
             fscanf(pLoad, "%ld",&aliens[i].shot_timer);//shot_timer
             load = fgetc(pLoad);// INTRA_STRUCT
