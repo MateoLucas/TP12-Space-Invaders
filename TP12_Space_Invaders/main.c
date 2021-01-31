@@ -1,10 +1,6 @@
-/* this is a complete copy of the source from allegro vivace's 'gameplay' section.
- *
- * for gcc users, it can be compiled & run with:
- *
- * gcc game.c -o game $(pkg-config allegro-5 allegro_font-5 allegro_primitives-5 allegro_audio-5 allegro_acodec-5 allegro_image-5 --libs --cflags)
- * ./game
- */
+
+
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -187,8 +183,8 @@ void sprites_init()
 
     muro1 = al_load_bitmap("Muro.png");
     must_init(muro1, "Muro.png");
-    muro3 = al_load_bitmap("Muro_roto.png");
-    must_init(muro3, "Muro_roto.png");
+    muro3 = al_load_bitmap("Muro_3.png");
+    must_init(muro3, "Muro_3.png");
     
     sprites.ship = sprite_grab(0, 0, SHIP_W, SHIP_H);
 
@@ -453,7 +449,7 @@ typedef struct SHOT
 
 #define SHOTS_N 128
 SHOT shots[SHOTS_N];
-bool ship_shot=false;
+bool ship_shot_n=false;
 void shots_init()
 {
     for(int i = 0; i < SHOTS_N; i++)
@@ -478,8 +474,9 @@ bool shots_add(bool ship, bool straight, int x, int y)
 
         shots[i].ship = ship;
 
-        if(ship && !ship_shot)
+        if(ship && !ship_shot_n)
         {
+            ship_shot_n = true;
             shots[i].x = x - (SHIP_SHOT_W / 2);
             shots[i].y = y;
         }
@@ -824,7 +821,7 @@ void aliens_update()
 
             if(shots_collide(false, aliens[i].x, aliens[i].y, ALIEN_W[aliens[i].type], ALIEN_H[aliens[i].type]))
             {
-                ship_shot = false;
+                ship_shot_n = false;
                 aliens[i].life--;
                 aliens[i].blink = 4;
             }
@@ -1183,11 +1180,11 @@ int main()
     if(save==NULL)
         printf("save error!");
     
-    int load;
+    /*int load;
     load = load_game();
     if(load == NULL)
         printf("load error!");
-    
+    */
     while(1)
     {
         al_wait_for_event(queue, &event);
