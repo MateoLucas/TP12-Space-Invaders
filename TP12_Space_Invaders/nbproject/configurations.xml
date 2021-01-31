@@ -8,6 +8,8 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>Muro.png</itemPath>
+      <itemPath>Muro_3.png</itemPath>
       <itemPath>explode1.flac</itemPath>
       <itemPath>explode2.flac</itemPath>
       <itemPath>shot.flac</itemPath>
@@ -40,7 +42,28 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>`pkg-config --libs allegro-5`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs allegro_acodec-5`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs allegro_audio-5`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs allegro_color-5`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs allegro_dialog-5`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs allegro_font-5`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs allegro_image-5`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs allegro_main-5`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs allegro_memfile-5`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs allegro_physfs-5`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs allegro_primitives-5`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs allegro_ttf-5`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs allegro_video-5`</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
+      <item path="Muro.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Muro_3.png" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="basura.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="explode1.flac" ex="false" tool="3" flavor2="0">
@@ -74,6 +97,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Muro.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Muro_3.png" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="basura.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="explode1.flac" ex="false" tool="3" flavor2="0">
