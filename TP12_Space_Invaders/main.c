@@ -453,7 +453,7 @@ typedef struct SHOT
 
 #define SHOTS_N 128
 SHOT shots[SHOTS_N];
-
+bool ship_shot=false;
 void shots_init()
 {
     for(int i = 0; i < SHOTS_N; i++)
@@ -478,7 +478,7 @@ bool shots_add(bool ship, bool straight, int x, int y)
 
         shots[i].ship = ship;
 
-        if(ship)
+        if(ship && !ship_shot)
         {
             shots[i].x = x - (SHIP_SHOT_W / 2);
             shots[i].y = y;
@@ -824,9 +824,10 @@ void aliens_update()
 
             if(shots_collide(false, aliens[i].x, aliens[i].y, ALIEN_W[aliens[i].type], ALIEN_H[aliens[i].type]))
             {
-            aliens[i].life--;
-            aliens[i].blink = 4;
-        }
+                ship_shot = false;
+                aliens[i].life--;
+                aliens[i].blink = 4;
+            }
         
             int cx = aliens[i].x + (ALIEN_W[aliens[i].type] / 2);
             int cy = aliens[i].y + (ALIEN_H[aliens[i].type] / 2);
@@ -1040,9 +1041,10 @@ int save_game()
         fputc(INTRA_ESTRUC,pSave);
         fprintf(pSave,"%d",aliens[i].shot_timer);
         fputc(INTRA_ESTRUC,pSave);
-        fprintf(pSave,"%d",aliens[i].blink);fscanf();
-            fscanf();
-            fgetc();
+        fprintf(pSave,"%d",aliens[i].blink);
+        //fscanf();
+          //  fscanf();
+            //fgetc();
         fputc(INTRA_ESTRUC,pSave);
         fprintf(pSave,"%d",aliens[i].life);
         fputc(INTRA_ESTRUC,pSave);
