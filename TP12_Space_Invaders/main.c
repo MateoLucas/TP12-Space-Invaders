@@ -362,9 +362,10 @@ typedef struct SHOT
 
 #define SHOTS_N 128
 SHOT shots[SHOTS_N];
-bool ship_shot_n=false;
+bool ships_one_shot ; // true when its shot
 void shots_init()
 {
+    ships_one_shot = false;
     for(int i = 0; i < SHOTS_N; i++)
         shots[i].used = false;
 }
@@ -387,9 +388,8 @@ bool shots_add(bool ship, bool straight, int x, int y)
 
         shots[i].ship = ship;
 
-        if(ship && !ship_shot_n)
+        if(ship)
         {
-            ship_shot_n = true;
             shots[i].x = x - (SHIP_SHOT_W / 2);
             shots[i].y = y;
         }
@@ -432,6 +432,7 @@ void shots_update()
             if(shots[i].y < -SHIP_SHOT_H)
             {
                 shots[i].used = false;
+                ships_one_shot = false;
                 continue;
             }
         }
@@ -446,6 +447,7 @@ void shots_update()
             || (shots[i].y > BUFFER_H)
             ) {
                 shots[i].used = false;
+
                 continue;
             }
         }
@@ -481,6 +483,8 @@ bool shots_collide(bool ship, int x, int y, int w, int h)
         {
             fx_add(true, shots[i].x + (sw / 2), shots[i].y + (sh / 2));
             shots[i].used = false;
+            if(shots[i].ship)
+                ships_one_shot = false;
             return true;
         }
     }
@@ -553,10 +557,7 @@ void ship_update()
         ship.x -= SHIP_SPEED;
     if(key[ALLEGRO_KEY_RIGHT])
         ship.x += SHIP_SPEED;
-    //if(key[ALLEGRO_KEY_UP])
-        ship.y -= SHIP_SPEED;
-    //if(key[ALLEGRO_KEY_DOWN])
-        ship.y += SHIP_SPEED;
+
 
     if(ship.x < 0)
         ship.x = 0;
@@ -591,9 +592,13 @@ void ship_update()
         ship.shot_timer--;
     else if(key[ALLEGRO_KEY_X])
     {
-        int x = ship.x + (SHIP_W / 2);
-        if(shots_add(true, false, x, ship.y))
+        if(!ships_one_shot)//el unico tiro posible se uso
+        {
+            int x = ship.x + (SHIP_W / 2);
+            if(shots_add(true, false, x, ship.y))
             ship.shot_timer = 5;
+            ships_one_shot = true;
+        }
     }
 }
 
@@ -651,7 +656,7 @@ void aliens_init()
         aliens[t].type = ALIEN_TYPE_BUG;
         aliens[t].shot_timer = between(1, 99);
         aliens[t].blink = 0;
-        aliens[t].life = 4;
+        aliens[t].life = 2;
         if(columnas >= N_COLS)
         {
             columnas=0;
@@ -734,7 +739,6 @@ void aliens_update()
 
             if(shots_collide(false, aliens[i].x, aliens[i].y, ALIEN_W[aliens[i].type], ALIEN_H[aliens[i].type]))
             {
-                ship_shot_n = false;
                 aliens[i].life--;
                 aliens[i].blink = 4;
             }
@@ -832,7 +836,7 @@ void muro_init ()
     muro_arr[0].life=2;
     muro_arr[0].type=1;
     muro_arr[0].x=BUFFER_W/9;
-    muro_arr[0].y=195;
+    muro_arr[0].y=195;// numeri magico?
     int j;
     for(j=1;j<MURO_N;j++)
     {   
