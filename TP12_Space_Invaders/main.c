@@ -265,10 +265,10 @@ void muro_init ()
 {
     int i;
     int j;
-            muro_arr[0].used = true;
-        muro_arr[0].life=2;
-        muro_arr[0].x=BUFFER_H;
-        muro_arr[0].y=BUFFER_W;
+    muro_arr[0].used = true;
+    muro_arr[0].life=2;
+    muro_arr[0].x=BUFFER_H;
+    muro_arr[0].y=BUFFER_W;
     for (j=1;j<3;j++)
     {   
         muro_arr[j].used = true;
@@ -326,8 +326,8 @@ void muro_draw ()
 {
     //for (int i=0;i<MURO_N;i++)
    // {
-        
-            al_draw_bitmap(muro1, muro_arr[0].x, muro_arr[0].y, 0);
+        //if()
+    al_draw_bitmap(muro1, muro_arr[0].x, muro_arr[0].y, 0);
         //else
             //al_draw_bitmap(muro3, muro_arr[i].x, muro_arr[i].y, 0);
     //}
