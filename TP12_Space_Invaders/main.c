@@ -514,8 +514,6 @@ void shots_draw()
         }
     }
 }
-
-
 // --- ship ---
 
 #define SHIP_SPEED 3
@@ -614,7 +612,6 @@ void ship_draw()
     al_draw_bitmap(sprites.ship, ship.x, ship.y, 0);
 }
 
-
 // --- aliens ---
 
 typedef enum ALIEN_TYPE
@@ -665,29 +662,18 @@ void aliens_init()
         aliens[t].y = REFERENCE_Y+ s* ALIEN_SPACE_BUFFER;
     }
 }
+
+
 bool aliens_last(int alien_n)
 {
     int i;
-    bool answer=false;
-    int dead=0;
-    int count=0;
-    if (alien_n>(ALIENS_N-N_COLS))
+    bool answer=true;
+    for(i=alien_n+1; i < ALIENS_N; i++)
     {
-        answer=true;
+        if( aliens[i].used && (aliens[i].x == aliens[alien_n].x) &&(aliens[alien_n].y < aliens[i].y))
+            answer = false;              
     }
-
-    else if (!aliens[alien_n+N_COLS].used)
-    {
-        answer=true;
-        //for(i=alien_n+N_COLS ; i<=ALIENS_N ; i+=N_COLS)
-        //{
-          //  count++;
-            //if(!aliens[i].used)
-              //  dead++;
-        //}
-        //if(dead == count)
-          //  answer = true;
-   }
+    return answer;
 }
 void aliens_update()
 {   
@@ -1073,9 +1059,9 @@ int load_game()
         int i;
         for(i=0;i<= ALIENS_N-1;i++)
         {
-            fscanf(pLoad, "%ld",&aliens[i].x);//x
+            fscanf(pLoad, "%d",&aliens[i].x);//x
             load = fgetc(pLoad);// INTRA_STRUCT
-            fscanf(pLoad, "%ld",&aliens[i].y);//y
+            fscanf(pLoad, "%d",&aliens[i].y);//y
             load = fgetc(pLoad);// INTRA_STRUCT
             load = fgetc(pLoad);
             switch (load)
@@ -1088,28 +1074,28 @@ int load_game()
                         break;
             }
             load = fgetc(pLoad);// INTRA_STRUCT
-            fscanf(pLoad, "%ld",&aliens[i].shot_timer);//shot_timer
+            fscanf(pLoad, "%d",&aliens[i].shot_timer);//shot_timer
             load = fgetc(pLoad);// INTRA_STRUCT
-            fscanf(pLoad, "%ld",&aliens[i].blink);//blink
+            fscanf(pLoad, "%d",&aliens[i].blink);//blink
             load = fgetc(pLoad);// INTRA_STRUCT
-            fscanf(pLoad, "%ld",&aliens[i].life);//lives
+            fscanf(pLoad, "%d",&aliens[i].life);//lives
             load = fgetc(pLoad);// INTRA_STRUCT
             aliens[i].used = ((fgetc(pLoad)=='t') ? true : false);//used  
             load = fgetc(pLoad);//ESTRUCTURA
         }
         //ship
         load = fgetc(pLoad);//ESTRUCTURA
-        fscanf(pLoad, "%ld",&ship.x);//x
+        fscanf(pLoad, "%d",&ship.x);//x
         load = fgetc(pLoad);// INTRA_STRUCT
-        fscanf(pLoad, "%ld",&ship.y);//y
+        fscanf(pLoad, "%d",&ship.y);//y
         load = fgetc(pLoad);// INTRA_STRUCT
-        fscanf(pLoad, "%ld",&ship.shot_timer);//shot_timer
+        fscanf(pLoad, "%d",&ship.shot_timer);//shot_timer
         load = fgetc(pLoad);// INTRA_STRUCT
-        fscanf(pLoad, "%ld",&ship.lives);//lives
+        fscanf(pLoad, "%d",&ship.lives);//lives
         load = fgetc(pLoad);// INTRA_STRUCT
-        fscanf(pLoad, "%ld",&ship.respawn_timer);//respawn
+        fscanf(pLoad, "%d",&ship.respawn_timer);//respawn
         load = fgetc(pLoad);// INTRA_STRUCT
-        fscanf(pLoad, "%ld",&ship.invincible_timer);//lives
+        fscanf(pLoad, "%d",&ship.invincible_timer);//lives
         load = fgetc(pLoad);// INTRA_STRUCT
         
         
