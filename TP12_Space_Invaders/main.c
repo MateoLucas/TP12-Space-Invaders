@@ -816,6 +816,38 @@ void aliens_draw()
     }
 }
 
+ ALIEN mother;
+
+void alien_m_init()
+{
+    mother.x=BUFFER_W;
+    mother.y=BUFFER_H/7;
+    mother.type=ALIEN_TYPE_THICCBOI;
+    mother.life=1;
+    mother.used=true;
+    
+}
+
+void alien_m_draw()
+{
+    if (mother.used)
+        al_draw_bitmap(sprites.alien[mother.type],mother.x,mother.y,0);
+}
+
+void alien_m_update()
+{
+    mother.x-=3;
+    if (shots_collide(false,mother.x,mother.y,ALIEN_THICCBOI_W,ALIEN_THICCBOI_H))
+        mother.life--;
+    if (mother.life==0)
+        mother.used=false;
+    if (mother.x<=-ALIEN_THICCBOI_W)
+    {
+        mother.used=true;
+        mother.x=BUFFER_W;
+    }
+}
+
 #define MURO_S 8
 #define MURO_H 195
 #define MURO_N 48
@@ -1162,6 +1194,7 @@ int main()
     aliens_init();
     stars_init();
     muro_init();
+    alien_m_init();
 
     frames = 0;
     score = 0;
@@ -1196,6 +1229,7 @@ int main()
                 aliens_update();
                 hud_update();
                 muro_update();
+                alien_m_update();
 
                 if(key[ALLEGRO_KEY_ESCAPE])
                     done = true;
@@ -1225,6 +1259,7 @@ int main()
             fx_draw();
             ship_draw();
             muro_draw();
+            alien_m_draw();
 
             hud_draw();
 
