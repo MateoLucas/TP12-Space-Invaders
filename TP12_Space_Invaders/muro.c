@@ -5,7 +5,7 @@
  */
 
 
-
+#include "muro.h"
 
 typedef struct MURO
 {

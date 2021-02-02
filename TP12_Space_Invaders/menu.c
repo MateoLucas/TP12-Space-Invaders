@@ -3,6 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+#include "menu.h"
 void menu ()
 {
          al_draw_text(

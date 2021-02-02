@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 
-#define ESTRUCTURA '#'
-#define INTRA_ESTRUC '|'
-#define END_LOAD '$'
+#include "load&save.h"
 
 int save_game()
 {

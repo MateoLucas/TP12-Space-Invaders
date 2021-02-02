@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+#include "ship.h"
+
 typedef struct SHIP
 {
     int x, y;

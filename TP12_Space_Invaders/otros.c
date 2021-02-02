@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+#include "otros.h"
 
 long frames;
 long score;

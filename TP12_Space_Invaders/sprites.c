@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-
+#include "sprites.h"
 
 const int ALIEN_W[] = {14, 13, 45};
 const int ALIEN_H[] = { 9, 10, 27};

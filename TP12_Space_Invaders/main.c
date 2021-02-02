@@ -10,7 +10,15 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_image.h>
-
+#include "aliens.h"
+#include "ship.h"
+#include "fx.h"
+#include "load&save.h"
+#include "menu.h"
+#include "muro.h"
+#include "otros.h"
+#include "shots.h"
+#include "sprites.h"
 
 // --- general ---
 

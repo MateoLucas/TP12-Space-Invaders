@@ -11,6 +11,9 @@
  * Created on February 2, 2021, 6:37 PM
  */
 
+#include "otros.h"
+#include "sprites.h"
+
 #ifndef ALIENS_H
 #define ALIENS_H
 

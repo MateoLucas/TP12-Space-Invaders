@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+#include "fx.h"
+
 ALLEGRO_SAMPLE* sample_shot;
 ALLEGRO_SAMPLE* sample_explode[2];
 

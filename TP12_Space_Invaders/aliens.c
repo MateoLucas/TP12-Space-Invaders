@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 
+#include "aliens.h"
+#include "otros.h"
+#include "sprites.h"
+#include "shots.h"
 
 typedef enum ALIEN_TYPE
 {
