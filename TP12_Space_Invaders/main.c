@@ -1201,89 +1201,93 @@ int main()
     muro_init();
     alien_m_init();
 
-    frames = 0;
-    score = 0;
-
-    bool done = false;
-    bool redraw = true;
-    ALLEGRO_EVENT event;
-
-    al_start_timer(timer);
     
-    int save;
-    save = save_game();
-    if(save==NULL)
-        printf("save error!");
     
-    /*int load;
-    load = load_game();
-    if(load == NULL)
-        printf("load error!");
-    */
-    bool pause = false;
-    
-    while(1)
+    while(1)//menu
     {
-        al_wait_for_event(queue, &event);
-        
-        switch(event.type)
+        frames = 0;
+        score = 0;
+        bool done = false;
+        bool redraw = true;
+        ALLEGRO_EVENT event;
+        al_start_timer(timer);
+        bool pause = false;
+        while(1)//juego
         {
-            
-                
-            case ALLEGRO_EVENT_TIMER:
-                if(!pause)
-                {
-                    fx_update();
-                    shots_update();
-                    stars_update();
-                    ship_update();
-                    aliens_update();
-                    hud_update();
-                    muro_update();
-                    alien_m_update();
-                }
-               
-                if(key[ALLEGRO_KEY_P])
-                {
-                    pause = pause ? false : true;
-                }
-                if(key[ALLEGRO_KEY_ESCAPE])
+            al_wait_for_event(queue, &event);
+
+            switch(event.type)
+            {
+
+
+                case ALLEGRO_EVENT_TIMER:
+                    if(!pause)
+                    {
+                        fx_update();
+                        shots_update();
+                        stars_update();
+                        ship_update();
+                        aliens_update();
+                        hud_update();
+                        muro_update();
+                        alien_m_update();
+                    }
+
+                    if(key[ALLEGRO_KEY_P])//corregir
+                    {
+                        pause = pause ? false : true;
+                    }
+                    if(key[ALLEGRO_KEY_S])
+                    {
+                        int save;
+                        save = save_game();
+                        if(!save==NULL)
+                            printf("save error!");
+                    }
+                    if(key[ALLEGRO_KEY_L])//corregir
+                    {
+                        int load;
+                        load = load_game();
+                        if(load == NULL)
+                            printf("load error!");
+                    }
+                    if(key[ALLEGRO_KEY_ESCAPE])
+                        done = true;
+
+                    redraw = true;
+                    frames++;
+                    break;
+
+                case ALLEGRO_EVENT_DISPLAY_CLOSE:
                     done = true;
+                    break;
+            }
 
-                redraw = true;
-                frames++;
+            if(done)
                 break;
 
-            case ALLEGRO_EVENT_DISPLAY_CLOSE:
-                done = true;
-                break;
-        }
+            keyboard_update(&event);
 
-        if(done)
-            break;
+            if(redraw && al_is_event_queue_empty(queue))
+            {
+                disp_pre_draw();
+                al_clear_to_color(al_map_rgb(0,0,0));
 
-        keyboard_update(&event);
+                stars_draw();
+                aliens_draw();
+                shots_draw();
+                fx_draw();
+                ship_draw();
+                muro_draw();
+                alien_m_draw();
 
-        if(redraw && al_is_event_queue_empty(queue))
-        {
-            disp_pre_draw();
-            al_clear_to_color(al_map_rgb(0,0,0));
+                hud_draw();
 
-            stars_draw();
-            aliens_draw();
-            shots_draw();
-            fx_draw();
-            ship_draw();
-            muro_draw();
-            alien_m_draw();
-
-            hud_draw();
-
-            disp_post_draw();
-            redraw = false;
+                disp_post_draw();
+                redraw = false;
+            }
         }
     }
-
     sprites_deinit();
     hud_deinit();
     audio_deinit();
