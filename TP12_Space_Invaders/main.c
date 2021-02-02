@@ -675,13 +675,21 @@ bool aliens_last(int alien_n)
     }
     return answer;
 }
+
 void aliens_update()
 {   
     int j;
     bool detect_border=false;
     bool static direction = false;//true = derecha, flase = izquierda
-    //int static alien_speed_factor = 2*frames/1000;
-    
+    int speed_2 = 1;
+    int static n_frames = 0;
+    int static speed = 100;
+    n_frames++;
+    if(n_frames == (speed/10))
+        n_frames = 0;
+    if(speed <= 0)
+        speed_2 = 2;
+        
     for(j=0;j<ALIENS_N;j++)//while
     {
         if((aliens[j].used)&&((aliens[j].x >= BUFFER_W)||aliens[j].x<= 0))
@@ -713,10 +721,10 @@ void aliens_update()
         
             if(direction)
             {
-                aliens[i].x += 1;
+                aliens[i].x += speed_2*((n_frames == 0) ? 1 : 0);
             }else
             {
-                aliens[i].x -= 1;
+                aliens[i].x -= speed_2*((n_frames == 0) ? 1 : 0);
             }
         
 
@@ -735,7 +743,7 @@ void aliens_update()
             {
                 
                 fx_add(false, cx, cy);
-
+                speed--;
                 switch(aliens[i].type)
                 {
                 case ALIEN_TYPE_BUG:
