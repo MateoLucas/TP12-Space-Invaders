@@ -49,7 +49,7 @@ bool collide(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int 
 // --- display ---
 
 #define BUFFER_W 280
-#define BUFFER_H 220
+#define BUFFER_H 250
 
 #define DISP_SCALE 3
 #define DISP_W (BUFFER_W * DISP_SCALE)
@@ -663,7 +663,7 @@ void aliens_init()
     }
 }
 
-
+/*
 bool aliens_last(int alien_n)
 {
     int i;
@@ -675,7 +675,7 @@ bool aliens_last(int alien_n)
     }
     return answer;
 }
-
+*/
 void aliens_update()
 {   
     int j;
@@ -685,14 +685,14 @@ void aliens_update()
     int static n_frames = 0;
     int static speed = 100;
     n_frames++;
-    if(n_frames == (speed/10))
+    if(n_frames >= (speed/10))
         n_frames = 0;
     if(speed <= 0)
         speed_2 = 2;
         
     for(j=0;j<ALIENS_N;j++)//while
     {
-        if((aliens[j].used)&&((aliens[j].x >= BUFFER_W)||aliens[j].x<= 0))
+        if((aliens[j].used)&&((aliens[j].x >= BUFFER_W-ALIEN_BUG_W)||aliens[j].x<= 0))
         {
             detect_border=true;
         }
@@ -716,7 +716,15 @@ void aliens_update()
         {
             if(detect_border)
             {
-                aliens[i].y += ALIEN_BUG_H/2;        
+                aliens[i].y += ALIEN_BUG_H/2;
+                if(direction)
+                {
+                    aliens[i].x +=1;
+                }else
+                {
+                    aliens[i].x -=1;
+                }
+                
             }
         
             if(direction)
@@ -743,7 +751,7 @@ void aliens_update()
             {
                 
                 fx_add(false, cx, cy);
-                speed--;
+                speed-=3;
                 switch(aliens[i].type)
                 {
                 case ALIEN_TYPE_BUG:
@@ -772,7 +780,7 @@ void aliens_update()
                 switch(aliens[i].type)
                 {
                 case ALIEN_TYPE_BUG:
-                    if(aliens_last(i))
+                    if(!aliens[i+N_COLS].used)
                     {
                         shots_add(false, true, cx, cy);
                         aliens[i].shot_timer = 150;
