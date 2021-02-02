@@ -1153,7 +1153,12 @@ int load_game()
     int check = fclose(pLoad);
     return check;
 }
-
+void delay()
+{
+    int long d;
+    for (d = 1; d <= 32767000; d++)
+    {}
+}
 
 // --- main ---
 
@@ -1215,22 +1220,33 @@ int main()
     if(load == NULL)
         printf("load error!");
     */
+    bool pause = false;
+    
     while(1)
     {
         al_wait_for_event(queue, &event);
-
+        
         switch(event.type)
         {
+            
+                
             case ALLEGRO_EVENT_TIMER:
-                fx_update();
-                shots_update();
-                stars_update();
-                ship_update();
-                aliens_update();
-                hud_update();
-                muro_update();
-                alien_m_update();
-
+                if(!pause)
+                {
+                    fx_update();
+                    shots_update();
+                    stars_update();
+                    ship_update();
+                    aliens_update();
+                    hud_update();
+                    muro_update();
+                    alien_m_update();
+                }
+               
+                if(key[ALLEGRO_KEY_P])
+                {
+                    pause = pause ? false : true;
+                }
                 if(key[ALLEGRO_KEY_ESCAPE])
                     done = true;
 
