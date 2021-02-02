@@ -4,11 +4,21 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>aliens.h</itemPath>
+      <itemPath>fx.h</itemPath>
+      <itemPath>load&amp;save.h</itemPath>
+      <itemPath>menu.h</itemPath>
+      <itemPath>muro.h</itemPath>
+      <itemPath>otros.h</itemPath>
+      <itemPath>ship.h</itemPath>
+      <itemPath>shots.h</itemPath>
+      <itemPath>sprites.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
       <itemPath>Muro.png</itemPath>
+      <itemPath>Muro_2.png</itemPath>
       <itemPath>Muro_3.png</itemPath>
       <itemPath>explode1.flac</itemPath>
       <itemPath>explode2.flac</itemPath>
@@ -18,8 +28,17 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>aliens.c</itemPath>
       <itemPath>basura.c</itemPath>
+      <itemPath>fx.c</itemPath>
+      <itemPath>load&amp;save.c</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>menu.c</itemPath>
+      <itemPath>muro.c</itemPath>
+      <itemPath>otros.c</itemPath>
+      <itemPath>ship.c</itemPath>
+      <itemPath>shots.c</itemPath>
+      <itemPath>sprites.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -62,7 +81,13 @@
       </compileType>
       <item path="Muro.png" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Muro_2.png" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Muro_3.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="aliens.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="aliens.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="basura.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -70,9 +95,41 @@
       </item>
       <item path="explode2.flac" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="fx.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="fx.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="load&amp;save.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="load&amp;save.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="menu.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="menu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="muro.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="muro.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="otros.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="otros.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ship.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ship.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="shot.flac" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="shots.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="shots.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="sprites.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="sprites.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="spritesheet.png" ex="false" tool="3" flavor2="0">
       </item>
@@ -99,7 +156,13 @@
       </compileType>
       <item path="Muro.png" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Muro_2.png" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Muro_3.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="aliens.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="aliens.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="basura.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -107,9 +170,41 @@
       </item>
       <item path="explode2.flac" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="fx.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="fx.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="load&amp;save.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="load&amp;save.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="menu.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="menu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="muro.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="muro.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="otros.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="otros.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ship.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ship.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="shot.flac" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="shots.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="shots.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="sprites.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="sprites.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="spritesheet.png" ex="false" tool="3" flavor2="0">
       </item>
