@@ -1160,7 +1160,7 @@ void delay()
     {}
 }
 
-void menu ()
+/*void menu ()
 {
         al_draw_text(
             font,
@@ -1184,7 +1184,7 @@ void menu ()
             "QUIT"
         );
         
-}
+}*/
 
 // --- main ---
 
@@ -1228,95 +1228,118 @@ int main()
     alien_m_init();
 
     
-    
+    ALLEGRO_EVENT event;
+    al_start_timer(timer);
+     bool done = false;
     while(1)//menu
     {
-        menu();
-        frames = 0;
-        score = 0;
-        bool done = false;
-        bool redraw = true;
-        ALLEGRO_EVENT event;
-        al_start_timer(timer);
-        bool pause = false;
+        al_wait_for_event(queue, &event);
+        al_draw_text(
+            font,
+            al_map_rgb_f(1,1,1),
+            BUFFER_W / 2, BUFFER_H / 2,
+            ALLEGRO_ALIGN_CENTER,
+            "N E W   G A M E"
+        );
+        al_draw_text(
+            font,
+            al_map_rgb_f(1,1,1),
+            BUFFER_W / 2, 2*BUFFER_H / 5,
+            ALLEGRO_ALIGN_CENTER,
+            "LOAD GAME"
+        );      
+        al_draw_text(
+            font,
+            al_map_rgb_f(1,1,1),
+            BUFFER_W / 2, 3*BUFFER_H / 5,
+            ALLEGRO_ALIGN_CENTER,
+            "QUIT"
+        );
+        al_flip_display();
         if (false)
         {
-        while(1)//juego
+            frames = 0;
+            score = 0;
+           
+            bool redraw = true;
+            bool pause = false;
+            while(1)//juego
             {
-            al_wait_for_event(queue, &event);
+                al_wait_for_event(queue, &event);
 
-            switch(event.type)
-            {
+                switch(event.type)
+                {
 
 
-                case ALLEGRO_EVENT_TIMER:
-                    if(!pause)
-                    {
-                        fx_update();
-                        shots_update();
-                        stars_update();
-                        ship_update();
-                        aliens_update();
-                        hud_update();
-                        muro_update();
-                        alien_m_update();
-                    }
+                    case ALLEGRO_EVENT_TIMER:
+                        if(!pause)
+                        {
+                            fx_update();
+                            shots_update();
+                            stars_update();
+                            ship_update();
+                            aliens_update();
+                            hud_update();
+                            muro_update();
+                            alien_m_update();
+                        }
 
-                    if(key[ALLEGRO_KEY_P])//corregir
-                    {
-                        pause = pause ? false : true;
-                    }
-                    if(key[ALLEGRO_KEY_S])
-                    {
-                        int save;
-                        save = save_game();
-                        if(!save==NULL)
-                            printf("save error!");
-                    }
-                    if(key[ALLEGRO_KEY_L])//corregir
-                    {
-                        int load;
-                        load = load_game();
-                        if(load == NULL)
-                            printf("load error!");
-                    }
-                    if(key[ALLEGRO_KEY_ESCAPE])
+                        if(key[ALLEGRO_KEY_P])//corregir
+                        {
+                            pause = pause ? false : true;
+                            al_rest(1);
+                        }
+                        if(key[ALLEGRO_KEY_S])
+                        {
+                            int save;
+                            save = save_game();
+                            if(!save==NULL)
+                                printf("save error!");
+                        }
+                        if(key[ALLEGRO_KEY_L])//corregir
+                        {
+                            int load;
+                            load = load_game();
+                            if(load == NULL)
+                                printf("load error!");
+                        }
+                        if(key[ALLEGRO_KEY_ESCAPE])
+                            done = true;
+
+                        redraw = true;
+                        frames++;
+                        break;
+
+                    case ALLEGRO_EVENT_DISPLAY_CLOSE:
                         done = true;
+                        break;
+                }
 
-                    redraw = true;
-                    frames++;
+                if(done)
                     break;
 
-                case ALLEGRO_EVENT_DISPLAY_CLOSE:
-                    done = true;
-                    break;
+                keyboard_update(&event);
+
+                if(redraw && al_is_event_queue_empty(queue))
+                {
+                    disp_pre_draw();
+                    al_clear_to_color(al_map_rgb(0,0,0));
+
+                    stars_draw();
+                    aliens_draw();
+                    shots_draw();
+                    fx_draw();
+                    ship_draw();
+                    muro_draw();
+                    alien_m_draw();
+
+                    hud_draw();
+
+                    disp_post_draw();
+                    redraw = false;
+                }
+
             }
-
-            if(done)
-                break;
-
-            keyboard_update(&event);
-
-            if(redraw && al_is_event_queue_empty(queue))
-            {
-                disp_pre_draw();
-                al_clear_to_color(al_map_rgb(0,0,0));
-
-                stars_draw();
-                aliens_draw();
-                shots_draw();
-                fx_draw();
-                ship_draw();
-                muro_draw();
-                alien_m_draw();
-
-                hud_draw();
-
-                disp_post_draw();
-                redraw = false;
-            }
-            
-        }
         }
         if(done)
             break;
