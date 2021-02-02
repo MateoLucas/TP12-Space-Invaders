@@ -801,10 +801,11 @@ void aliens_draw()
 }
 
 #define MURO_S 8
-#define MURO_H 8
+#define MURO_H 195
 #define MURO_N 48
 #define STRUCT_N 4
 #define M_POR_S 8
+
 
 typedef struct MURO
 {
@@ -822,7 +823,7 @@ void muro_init ()
     muro_arr[0].life=2;
     muro_arr[0].type=1;
     muro_arr[0].x=BUFFER_W/9;
-    muro_arr[0].y=195;// numeri magico?
+    muro_arr[0].y=MURO_H;// numeri magico?
     int j;
     for(j=1;j<MURO_N;j++)
     {   
