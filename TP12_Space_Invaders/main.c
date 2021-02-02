@@ -1160,6 +1160,32 @@ void delay()
     {}
 }
 
+void menu ()
+{
+        al_draw_text(
+            font,
+            al_map_rgb_f(1,1,1),
+            BUFFER_W / 2, BUFFER_H / 2,
+            ALLEGRO_ALIGN_CENTER,
+            "N E W G A M E"
+        );
+        al_draw_text(
+            font,
+            al_map_rgb_f(1,1,1),
+            BUFFER_W / 2, 2*BUFFER_H / 5,
+            ALLEGRO_ALIGN_CENTER,
+            "LOAD GAME"
+        );      
+        al_draw_text(
+            font,
+            al_map_rgb_f(1,1,1),
+            BUFFER_W / 2, 3*BUFFER_H / 5,
+            ALLEGRO_ALIGN_CENTER,
+            "QUIT"
+        );
+        
+}
+
 // --- main ---
 
 int main()
@@ -1205,6 +1231,7 @@ int main()
     
     while(1)//menu
     {
+        menu();
         frames = 0;
         score = 0;
         bool done = false;
@@ -1212,8 +1239,10 @@ int main()
         ALLEGRO_EVENT event;
         al_start_timer(timer);
         bool pause = false;
-        while(1)//juego
+        if (false)
         {
+        while(1)//juego
+            {
             al_wait_for_event(queue, &event);
 
             switch(event.type)
@@ -1286,7 +1315,11 @@ int main()
                 disp_post_draw();
                 redraw = false;
             }
+            
         }
+        }
+        if(done)
+            break;
     }
     sprites_deinit();
     hud_deinit();
