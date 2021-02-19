@@ -5,6 +5,12 @@
  */
 
 #include "load&save.h"
+#include "aliens.h"
+#include "ship.h"
+#include "muro.h"
+#include "shots.h"
+#include "fx.h"
+extern long score;
 
 int save_game()
 {

@@ -36,9 +36,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/aliens.o \
-	${OBJECTDIR}/basura.o \
 	${OBJECTDIR}/fx.o \
-	${OBJECTDIR}/load&save.o \
+	${OBJECTDIR}/loadSave.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/menu.o \
 	${OBJECTDIR}/muro.o \
@@ -77,20 +76,15 @@ ${OBJECTDIR}/aliens.o: aliens.c
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/aliens.o aliens.c
 
-${OBJECTDIR}/basura.o: basura.c
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/basura.o basura.c
-
 ${OBJECTDIR}/fx.o: fx.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/fx.o fx.c
 
-${OBJECTDIR}/load&save.o: load&save.c
+${OBJECTDIR}/loadSave.o: loadSave.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/load&save.o load&save.c
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/loadSave.o loadSave.c
 
 ${OBJECTDIR}/main.o: main.c
 	${MKDIR} -p ${OBJECTDIR}

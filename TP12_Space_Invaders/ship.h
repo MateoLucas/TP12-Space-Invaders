@@ -12,8 +12,8 @@
  * Created on February 2, 2021, 6:37 PM
  */
 
-#ifndef SHIP_H
-#define SHIP_H
+#ifndef SHIP_HEADER
+#define SHIP_HEADER
 
 #define SHIP_SPEED 3
 #define SHIP_MAX_X (BUFFER_W - SHIP_W)
