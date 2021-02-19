@@ -11,8 +11,8 @@
  * Created on February 2, 2021, 6:38 PM
  */
 
-#ifndef MURO_H
-#define MURO_H
+#ifndef MURO_
+#define MURO_
 
 #define MURO_S 8
 #define MURO_H 195
@@ -25,5 +25,5 @@ void muro_draw ();
 void muro_update ();
 
 
-#endif /* MURO_H */
+#endif /* MURO_ */
 
