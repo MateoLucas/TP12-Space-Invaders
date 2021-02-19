@@ -24,8 +24,8 @@
       <itemPath>aliens.h</itemPath>
       <itemPath>fx.c</itemPath>
       <itemPath>fx.h</itemPath>
-      <itemPath>load&amp;save.h</itemPath>
       <itemPath>loadSave.c</itemPath>
+      <itemPath>loadSave.h</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>menu.c</itemPath>
       <itemPath>menu.h</itemPath>
@@ -110,9 +110,9 @@
       </item>
       <item path="fx.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="load&amp;save.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="loadSave.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="loadSave.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -187,9 +187,9 @@
       </item>
       <item path="fx.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="load&amp;save.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="loadSave.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="loadSave.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
