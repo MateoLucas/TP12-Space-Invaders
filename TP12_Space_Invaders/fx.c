@@ -44,13 +44,7 @@ void audio_deinit()
 
 // --- fx ---
 
-typedef struct FX
-{
-    int x, y;
-    int frame;
-    bool spark;
-    bool used;
-} FX;
+
 
 
 FX fx[FX_N];

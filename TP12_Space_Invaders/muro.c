@@ -7,13 +7,7 @@
 
 #include "muro.h"
 
-typedef struct MURO
-{
-    int x, y;
-    int life;
-    int type;
-    bool used;
-} MURO;
+
 
 MURO muro_arr[MURO_N];
 

@@ -5,13 +5,7 @@
  */
 #include "shots.h"
 
-typedef struct SHOT
-{
-    int x, y, dx, dy;
-    int frame;
-    bool ship;
-    bool used;
-} SHOT;
+
 
 
 SHOT shots[SHOTS_N];

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+#include <stdio.h>
 #include "loadSave.h"
 #include "aliens.h"
 #include "ship.h"
@@ -11,6 +11,13 @@
 #include "shots.h"
 #include "fx.h"
 extern long score;
+extern FX fx[FX_N];
+extern ALIEN aliens[ALIENS_N];
+extern MURO muro_arr[MURO_N];
+extern SHIP ship;
+extern SHOT shots[SHOTS_N];
+extern bool ships_one_shot;
+extern ALIEN mother;
 
 int save_game()
 {

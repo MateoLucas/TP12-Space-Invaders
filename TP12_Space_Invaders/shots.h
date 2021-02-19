@@ -15,6 +15,13 @@
 #define SHOTS_H
 
 #define SHOTS_N 128
+typedef struct SHOT
+{
+    int x, y, dx, dy;
+    int frame;
+    bool ship;
+    bool used;
+} SHOT;
 
 void shots_init();
 bool shots_add(bool ship, bool straight, int x, int y);

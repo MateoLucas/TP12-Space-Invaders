@@ -19,6 +19,14 @@
 #define FX_N 55 //ALIEN_N
 #define STARS_N ((BUFFER_W / 2) - 1)
 
+typedef struct FX
+{
+    int x, y;
+    int frame;
+    bool spark;
+    bool used;
+} FX;
+
 void audio_init();
 void audio_deinit();
 void fx_init();

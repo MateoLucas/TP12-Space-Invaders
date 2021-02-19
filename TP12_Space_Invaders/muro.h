@@ -20,6 +20,14 @@
 #define STRUCT_N 4
 #define M_POR_S 8
 
+typedef struct MURO
+{
+    int x, y;
+    int life;
+    int type;
+    bool used;
+} MURO;
+
 void muro_init ();
 void muro_draw ();
 void muro_update ();

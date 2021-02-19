@@ -11,28 +11,7 @@
 #include "shots.h"
 #include "fx.h"
 
-int ALIEN_W[] = {14, 13, 45};
-int ALIEN_H[] = { 9, 10, 27};
 
-extern SPRITES sprites;
-
-typedef enum ALIEN_TYPE
-{
-    ALIEN_TYPE_BUG = 0,
-    ALIEN_TYPE_ARROW,
-    ALIEN_TYPE_THICCBOI,
-    ALIEN_TYPE_N
-} ALIEN_TYPE;
-
-typedef struct ALIEN
-{
-    int x, y;
-    ALIEN_TYPE type;
-    int shot_timer;
-    int blink;
-    int life;
-    bool used;
-} ALIEN;
 
 
 
