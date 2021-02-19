@@ -20,21 +20,7 @@
 #include "shots.h"
 #include "sprites.h"
 
-// --- general ---
 
-
-
-// --- sprites ---
-
-// --- audio ---
-
-
-// --- shots ---
-
-// --- aliens ---
-
-
-// --- stars ---
 
 
 /*SAVE GAME 
