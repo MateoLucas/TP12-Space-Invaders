@@ -8,6 +8,7 @@
 #include "otros.h"
 #include "sprites.h"
 #include "shots.h"
+#include "fx.h"
 
 typedef enum ALIEN_TYPE
 {
