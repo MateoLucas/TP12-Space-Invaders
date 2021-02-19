@@ -11,6 +11,8 @@
  * Created on February 2, 2021, 6:37 PM
  */
 
+#include <stdbool.h>
+
 #ifndef FX_H
 #define FX_H
 

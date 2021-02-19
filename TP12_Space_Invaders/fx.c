@@ -5,6 +5,16 @@
  */
 
 #include "fx.h"
+#include "otros.h"
+#include "sprites.h"
+#include "ship.h"
+#include <stdbool.h>
+#include <allegro5/allegro5.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
+#include <allegro5/allegro_image.h>
 
 ALLEGRO_SAMPLE* sample_shot;
 ALLEGRO_SAMPLE* sample_explode[2];
@@ -88,6 +98,7 @@ void fx_update()
 
 void fx_draw()
 {
+    extern SPRITES sprites;
     for(int i = 0; i < FX_N; i++)
     {
         if(!fx[i].used)
@@ -170,6 +181,8 @@ void hud_deinit()
 
 void hud_update()
 {
+    extern long score;
+    long frames;
     if(frames % 2)
         return;
 
@@ -183,6 +196,8 @@ void hud_update()
 
 void hud_draw()
 {
+    extern SHIP ship;
+    extern SPRITES sprites;
     al_draw_textf(
         font,
         al_map_rgb_f(1,1,1),

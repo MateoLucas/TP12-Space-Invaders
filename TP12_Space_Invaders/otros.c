@@ -12,9 +12,6 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_image.h>
 
-long frames;
-long score;
-
 void must_init(bool test, const char *description)
 {
     if(test) return;

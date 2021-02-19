@@ -11,6 +11,14 @@
  * Created on February 2, 2021, 6:38 PM
  */
 
+#include <stdbool.h>
+#include <allegro5/allegro5.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
+#include <allegro5/allegro_image.h>
+
 #ifndef OTROS_H
 #define OTROS_H
 

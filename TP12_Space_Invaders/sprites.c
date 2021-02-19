@@ -6,25 +6,7 @@
 
 #include "sprites.h"
 
-const int ALIEN_W[] = {14, 13, 45};
-const int ALIEN_H[] = { 9, 10, 27};
 
-typedef struct SPRITES
-{
-    ALLEGRO_BITMAP* _sheet;
-
-    ALLEGRO_BITMAP* ship;
-    ALLEGRO_BITMAP* ship_shot[2];
-    ALLEGRO_BITMAP* life;
-
-    ALLEGRO_BITMAP* alien[3];
-    ALLEGRO_BITMAP* alien_shot;
-
-    ALLEGRO_BITMAP* explosion[EXPLOSION_FRAMES];
-    ALLEGRO_BITMAP* sparks[SPARKS_FRAMES];
-
-    ALLEGRO_BITMAP* powerup[4];
-} SPRITES;
 SPRITES sprites;
 
 ALLEGRO_BITMAP* muro_img[4];

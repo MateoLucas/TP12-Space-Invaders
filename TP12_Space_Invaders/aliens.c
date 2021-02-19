@@ -4,11 +4,17 @@
  * and open the template in the editor.
  */
 
+#include <stdbool.h>
 #include "aliens.h"
 #include "otros.h"
 #include "sprites.h"
 #include "shots.h"
 #include "fx.h"
+
+int ALIEN_W[] = {14, 13, 45};
+int ALIEN_H[] = { 9, 10, 27};
+
+extern SPRITES sprites;
 
 typedef enum ALIEN_TYPE
 {
@@ -73,6 +79,7 @@ bool aliens_last(int alien_n)
 */
 void aliens_update()
 {   
+    long score;
     int j;
     bool detect_border=false;
     bool static direction = false;//true = derecha, flase = izquierda
