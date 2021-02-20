@@ -7,10 +7,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/mateo/Desktop/ITBA/Programacion%20C2/TP12-Space-Invaders/TP12_Space_Invaders/otros.h</file>
-            <file>file:/home/mateo/Desktop/ITBA/Programacion%20C2/TP12-Space-Invaders/TP12_Space_Invaders/sprites.h</file>
-            <file>file:/home/mateo/Desktop/ITBA/Programacion%20C2/TP12-Space-Invaders/TP12_Space_Invaders/aliens.c</file>
-            <file>file:/home/mateo/Desktop/ITBA/Programacion%20C2/TP12-Space-Invaders/TP12_Space_Invaders/main.c</file>
+            <file>file:/home/mariano/ITBA/Programacion%201/TP12-Space-Invaders/TP12-Space-Invaders/TP12_Space_Invaders/muro.c</file>
+            <file>file:/home/mariano/ITBA/Programacion%201/TP12-Space-Invaders/TP12-Space-Invaders/TP12_Space_Invaders/menu.c</file>
+            <file>file:/home/mariano/ITBA/Programacion%201/TP12-Space-Invaders/TP12-Space-Invaders/TP12_Space_Invaders/muro.h</file>
+            <file>file:/home/mariano/ITBA/Programacion%201/TP12-Space-Invaders/TP12-Space-Invaders/TP12_Space_Invaders/main.c</file>
+            <file>file:/home/mariano/ITBA/Programacion%201/TP12-Space-Invaders/TP12-Space-Invaders/TP12_Space_Invaders/otros.c</file>
+            <file>file:/home/mariano/ITBA/Programacion%201/TP12-Space-Invaders/TP12-Space-Invaders/TP12_Space_Invaders/ship.c</file>
+            <file>file:/home/mariano/ITBA/Programacion%201/TP12-Space-Invaders/TP12-Space-Invaders/TP12_Space_Invaders/fx.c</file>
         </group>
     </open-files>
 </project-private>

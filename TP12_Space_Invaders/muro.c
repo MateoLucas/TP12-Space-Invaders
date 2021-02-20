@@ -6,10 +6,20 @@
 
 
 #include "muro.h"
-
+#include "otros.h"
+#include <stdbool.h>
+#include <allegro5/allegro5.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
+#include <allegro5/allegro_image.h>
+#include "shots.h"
+#include "sprites.h"
 
 
 MURO muro_arr[MURO_N];
+ALLEGRO_BITMAP* muro_img[4];
 
 void muro_init ()
 {

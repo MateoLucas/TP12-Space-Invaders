@@ -83,7 +83,7 @@ void disp_post_draw()
 // --- keyboard ---
 
 
-unsigned char key[ALLEGRO_KEY_MAX];
+extern unsigned char key[ALLEGRO_KEY_MAX];
 
 void keyboard_init()
 {

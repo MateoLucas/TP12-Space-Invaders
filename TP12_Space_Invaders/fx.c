@@ -157,7 +157,7 @@ void stars_draw()
 
 // --- hud ---
 
-ALLEGRO_FONT* font;
+extern ALLEGRO_FONT* font;
 long score_display;
 
 void hud_init()

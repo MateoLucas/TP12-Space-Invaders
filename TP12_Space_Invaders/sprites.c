@@ -9,7 +9,7 @@
 
 SPRITES sprites;
 
-ALLEGRO_BITMAP* muro_img[4];
+extern ALLEGRO_BITMAP* muro_img[4];
 
 ALLEGRO_BITMAP* sprite_grab(int x, int y, int w, int h)
 {

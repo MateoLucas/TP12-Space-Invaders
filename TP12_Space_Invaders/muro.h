@@ -11,6 +11,8 @@
  * Created on February 2, 2021, 6:38 PM
  */
 
+#include <stdbool.h>
+
 #ifndef MURO_
 #define MURO_
 

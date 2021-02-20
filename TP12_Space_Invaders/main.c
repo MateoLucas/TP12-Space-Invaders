@@ -33,8 +33,14 @@
 
 // --- main ---
 
+
+
 int main()
 {
+    extern ALLEGRO_DISPLAY* disp;
+    extern long score;
+    extern long frames;
+    
     must_init(al_init(), "allegro");
     must_init(al_install_keyboard(), "keyboard");
 
@@ -76,6 +82,9 @@ int main()
     ALLEGRO_EVENT event;
     al_start_timer(timer);
      bool done = false;
+     
+    ALLEGRO_FONT* font;
+    unsigned char key[ALLEGRO_KEY_MAX];
     while(1)//menu
     {
         menu();
@@ -119,7 +128,7 @@ int main()
                         {
                             pause = pause ? false : true;
                             al_rest(1);
-                        }
+                        } 
                         if(key[ALLEGRO_KEY_S])
                         {
                             int save;
@@ -133,7 +142,7 @@ int main()
                             load = load_game();
                             if(load == NULL)
                                 printf("load error!");
-                        }
+                        } 
                         if(key[ALLEGRO_KEY_ESCAPE])
                             done = true;
 
